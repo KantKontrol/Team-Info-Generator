@@ -4,17 +4,43 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
-​
-const OUTPUT_DIR = path.resolve(__dirname, "output")
-const outputPath = path.join(OUTPUT_DIR, "team.html");
-​
 const render = require("./lib/htmlRenderer");
-​
-​
+const OUTPUT_DIR = path.resolve(__dirname, "output");
+const outputPath = path.join(OUTPUT_DIR, "team.html");
+
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-​
-// After the user has input all employees desired, call the `render` function (required
+
+const manInfo = [
+    {
+        type: "input",
+        message: "What is the Managers name?",
+        name: "mName"
+    },
+    {
+        type: "input",
+        message: "What is the Managers email?",
+        name: "mEmail"
+    }
+];
+
+const typePrompt = [
+    {
+        type: "list",
+        message: "Which Team Member are you adding?",
+        choices: ["Engineer", "Intern"],
+        name: "teamType"
+    }
+];
+
+const getManagerInfo = () => {
+
+    inquirer.prompt(manInfo).then(function(response){
+        console.log(response);
+    });
+}
+
+/*// After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
 ​
@@ -32,4 +58,4 @@ const render = require("./lib/htmlRenderer");
 // and Intern classes should all extend from a class named Employee; see the directions
 // for further information. Be sure to test out each class and verify it generates an 
 // object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work!```
+// for the provided `render` function to work!*/
