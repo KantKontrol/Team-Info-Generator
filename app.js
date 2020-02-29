@@ -89,6 +89,8 @@ const getTeamInfo = async () => {
     
     let addMember = true;
 
+    let members = [];
+
     while(addMember){
 
         let res = await inquirer.prompt(askNewMember); //ask if user wants to add more members
@@ -99,6 +101,12 @@ const getTeamInfo = async () => {
 
             if(res.teamType == "Engineer"){ //carry out the code for such below
                 console.log("Engineer!");
+
+                let basicInfo = await inquirer.prompt(askBasicInfo); //gets info for engineer
+
+                let githubUserName = await inquirer.prompt(askGithub);
+
+                members.push({ name: basicInfo.name, email: basicInfo.email, guser: githubUserName.github, role: "Engineer"});//adds there data to array
             }
             else if(res.teamType == "Intern"){
                 console.log("Intern!");
@@ -110,6 +118,8 @@ const getTeamInfo = async () => {
     
       
     }
+
+    console.log(members);
 
 }
 
