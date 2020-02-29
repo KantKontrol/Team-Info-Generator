@@ -133,6 +133,9 @@ async function init(){
 
     let manInfo = await getManagerInfo();
     let teamInfo = await getTeamInfo();
+
+    //Build objects and pass them through to html renderer
+    //clean up dry code
 }
 
 
