@@ -54,20 +54,55 @@ const getTeamInfo = async () => {
             message: "Which Team Member are you adding?",
             choices: ["Engineer", "Intern"],
             name: "teamType"
-        },
-        {
-
         }
     ];
 
+    const askBasicInfo = [
+        {
+            type: "input",
+            message: "What is there name?",
+            name: "name"
+        },
+        {
+            type: "input",
+            message: "What is there email?",
+            name: "email"
+        }
+    ];
+
+    const askGithub = [
+        {
+            type: "input",
+            message: "What is there github?",
+            name: "github"
+        }
+    ];
+
+    const askSchool = [
+        {
+            type: "input",
+            message: "What is there school?",
+            name: "school"
+        }
+    ];
+
+    
     let addMember = true;
 
     while(addMember){
 
-        let res = await inquirer.prompt(askNewMember);
+        let res = await inquirer.prompt(askNewMember); //ask if user wants to add more members
 
-        if(res.addMember){
-                
+        if(res.addMember){ //if they do
+
+            res = await inquirer.prompt(typePrompt); //ask if its an Engineer or Intern
+
+            if(res.teamType == "Engineer"){ //carry out the code for such below
+                console.log("Engineer!");
+            }
+            else if(res.teamType == "Intern"){
+                console.log("Intern!");
+            } 
         }
         else{
              addMember = false;
