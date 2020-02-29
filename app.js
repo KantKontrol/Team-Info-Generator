@@ -11,34 +11,68 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
-const manInfo = [
-    {
-        type: "input",
-        message: "What is the Managers name?",
-        name: "mName"
-    },
-    {
-        type: "input",
-        message: "What is the Managers email?",
-        name: "mEmail"
-    }
-];
 
-const typePrompt = [
-    {
-        type: "list",
-        message: "Which Team Member are you adding?",
-        choices: ["Engineer", "Intern"],
-        name: "teamType"
-    }
-];
 
-const getManagerInfo = () => {
+const getManagerInfo = async () => {
 
-    inquirer.prompt(manInfo).then(function(response){
-        console.log(response);
-    });
+    const manInfo = [
+        {
+            type: "input",
+            message: "What is the Managers name?",
+            name: "mName"
+        },
+        {
+            type: "input",
+            message: "What is the Managers email?",
+            name: "mEmail"
+        }
+    ];
+
+    let response = await inquirer.prompt(manInfo);
+
+    return response;
 }
+
+const getTeamInfo = async () => {
+
+    const askNewMember = [
+        {
+            type: "confirm",
+            message: "Would you like to add a team member?",
+            name: "addMember"
+        }
+    ];
+
+    const typePrompt = [
+        {
+            type: "list",
+            message: "Which Team Member are you adding?",
+            choices: ["Engineer", "Intern"],
+            name: "teamType"
+        }
+    ];
+
+    inquirer.prompt(askNewMember).then(response => {
+
+        if(response.addMember){
+            console.log("add member!");
+        }
+
+    });
+
+}
+
+async function init(){
+
+    let manInfo = await getManagerInfo();
+    let teamInfo = await getTeamInfo();
+}
+
+
+
+
+
+init();
 
 /*// After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
