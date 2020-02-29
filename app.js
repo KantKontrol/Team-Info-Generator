@@ -110,6 +110,12 @@ const getTeamInfo = async () => {
             }
             else if(res.teamType == "Intern"){
                 console.log("Intern!");
+
+                let basicInfo = await inquirer.prompt(askBasicInfo);
+
+                let school =  await inquirer.prompt(askSchool);
+
+                members.push({ name: basicInfo.name, email: basicInfo.email, school: school.school, role: "Intern"});//adds there data to array
             } 
         }
         else{
