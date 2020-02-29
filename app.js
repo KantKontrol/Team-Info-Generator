@@ -25,6 +25,11 @@ const getManagerInfo = async () => {
             type: "input",
             message: "What is the Managers email?",
             name: "mEmail"
+        },
+        {
+            tyoe: "input",
+            message: "What is the managers office number?",
+            name: "mOfficeNumber"
         }
     ];
 
@@ -49,16 +54,27 @@ const getTeamInfo = async () => {
             message: "Which Team Member are you adding?",
             choices: ["Engineer", "Intern"],
             name: "teamType"
+        },
+        {
+
         }
     ];
 
-    inquirer.prompt(askNewMember).then(response => {
+    let addMember = true;
 
-        if(response.addMember){
-            console.log("add member!");
+    while(addMember){
+
+        let res = await inquirer.prompt(askNewMember);
+
+        if(res.addMember){
+                
         }
-
-    });
+        else{
+             addMember = false;
+        }
+    
+      
+    }
 
 }
 
