@@ -13,7 +13,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 
 
-const getManagerInfo = async () => {
+const getManagerInfo = async (currentId) => {
 
     const manInfo = [
         {
@@ -27,18 +27,18 @@ const getManagerInfo = async () => {
             name: "mEmail"
         },
         {
-            tyoe: "input",
-            message: "What is the managers office number?",
+            type: "input",
+            message: "What is the Managers office number?",
             name: "mOfficeNumber"
         }
     ];
 
-    let response = await inquirer.prompt(manInfo);
+    let res = await inquirer.prompt(manInfo);
 
-    return response;
+    return new Manager(res.mName, currentId++, res.mEmail, res.mOfficeNumber);
 }
 
-const getTeamInfo = async () => {
+const getTeamInfo = async (currentId) => {
 
     const askNewMember = [
         {
@@ -106,7 +106,7 @@ const getTeamInfo = async () => {
 
                 let githubUserName = await inquirer.prompt(askGithub);
 
-                members.push({ name: basicInfo.name, email: basicInfo.email, guser: githubUserName.github, role: "Engineer"});//adds there data to array
+                members.push(new Engineer(basicInfo.name, currentId++, basicInfo.email, githubUserName.github));//adds there data to array
             }
             else if(res.teamType == "Intern"){
                 console.log("Intern!");
@@ -115,7 +115,7 @@ const getTeamInfo = async () => {
 
                 let school =  await inquirer.prompt(askSchool);
 
-                members.push({ name: basicInfo.name, email: basicInfo.email, school: school.school, role: "Intern"});//adds there data to array
+                members.push(new Intern(basicInfo.name, currentId++, basicInfo.email, school.school));//adds there data to array
             } 
         }
         else{
@@ -125,14 +125,19 @@ const getTeamInfo = async () => {
       
     }
 
-    console.log(members);
+    return members;
 
 }
 
 async function init(){
 
-    let manInfo = await getManagerInfo();
-    let teamInfo = await getTeamInfo();
+    const currentId = 1;
+
+    let managerObj = await getManagerInfo(currentId);
+    console.log(managerObj);
+    
+    let teamArray = await getTeamInfo(currentId);
+    console.log(teamArray);
 
     //Build objects and pass them through to html renderer
     //clean up dry code
