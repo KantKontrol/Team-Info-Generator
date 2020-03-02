@@ -35,7 +35,7 @@ const getManagerInfo = async (currentId) => {
 
     let res = await inquirer.prompt(manInfo);
 
-    return new Manager(res.mName, currentId++, res.mEmail, res.mOfficeNumber);
+    return new Manager(res.mName, currentId, res.mEmail, res.mOfficeNumber);
 }
 
 const getTeamInfo = async (currentId) => {
@@ -100,7 +100,6 @@ const getTeamInfo = async (currentId) => {
             res = await inquirer.prompt(typePrompt); //ask if its an Engineer or Intern
 
             if(res.teamType == "Engineer"){ //carry out the code for such below
-                console.log("Engineer!");
 
                 let basicInfo = await inquirer.prompt(askBasicInfo); //gets info for engineer
 
@@ -109,7 +108,6 @@ const getTeamInfo = async (currentId) => {
                 members.push(new Engineer(basicInfo.name, currentId++, basicInfo.email, githubUserName.github));//adds there data to array
             }
             else if(res.teamType == "Intern"){
-                console.log("Intern!");
 
                 let basicInfo = await inquirer.prompt(askBasicInfo);
 
@@ -131,13 +129,16 @@ const getTeamInfo = async (currentId) => {
 
 async function init(){
 
-    const currentId = 1;
+    let currentId = 1;
 
     let managerObj = await getManagerInfo(currentId);
-    console.log(managerObj);
+
+    currentId++;
     
     let teamArray = await getTeamInfo(currentId);
-    console.log(teamArray);
+    
+    teamArray.unshift(managerObj);//adds manager to beggining of teamArray
+
 
     //Build objects and pass them through to html renderer
     //clean up dry code
