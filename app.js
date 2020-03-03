@@ -11,9 +11,10 @@ const writeHTML = require("./lib/writeHTML");
 
 const getManagerInfo = async (currentId) => {
 
-    const manInfo = [   makeQuestion("input", "What is the Managers name?", "mName"), 
-                        makeQuestion("input", "What is the Managers email?", "mEmail"),
-                        makeQuestion("input", "What is the Managers office number?", "mOfficeNumber")
+    const manInfo = [  
+                     makeQuestion("input", "What is the Managers name?", "mName"), 
+                     makeQuestion("input", "What is the Managers email?", "mEmail"),
+                     makeQuestion("input", "What is the Managers office number?", "mOfficeNumber")
                     ];
 
     let res = await inquirer.prompt(manInfo);
@@ -43,7 +44,6 @@ const getTeamInfo = async (currentId) => {
     //Done setting up question arrays
 
     let addMember = true;
-
     let members = [];
 
     while(addMember){
@@ -74,8 +74,6 @@ const getTeamInfo = async (currentId) => {
         else{
              addMember = false;
         }
-    
-      
     }
 
     return members;
@@ -111,4 +109,3 @@ async function init(){
 }
 
 init();
-
