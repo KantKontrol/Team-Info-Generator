@@ -11,23 +11,10 @@ const writeHTML = require("./lib/writeHTML");
 
 const getManagerInfo = async (currentId) => {
 
-    const manInfo = [
-        {
-            type: "input",
-            message: "What is the Managers name?",
-            name: "mName"
-        },
-        {
-            type: "input",
-            message: "What is the Managers email?",
-            name: "mEmail"
-        },
-        {
-            type: "input",
-            message: "What is the Managers office number?",
-            name: "mOfficeNumber"
-        }
-    ];
+    const manInfo = [   makeQuestion("input", "What is the Managers name?", "mName"), 
+                        makeQuestion("input", "What is the Managers email?", "mEmail"),
+                        makeQuestion("input", "What is the Managers office number?", "mOfficeNumber")
+                    ];
 
     let res = await inquirer.prompt(manInfo);
 
@@ -36,13 +23,9 @@ const getManagerInfo = async (currentId) => {
 
 const getTeamInfo = async (currentId) => {
 
-    let askNewMember = [
-        {
-            type: "confirm",
-            message: "Would you like to add a team member?",
-            name: "addMember"
-        }
-    ];
+    //Setting up Question Arrays...
+
+    let askNewMember = [makeQuestion("confirm", "Would you like to add a team member?", "addMember")];
 
     let typePrompt = [
         {
@@ -53,34 +36,11 @@ const getTeamInfo = async (currentId) => {
         }
     ];
 
-    let askBasicInfo = [
-        {
-            type: "input",
-            message: "What is there name?",
-            name: "name"
-        },
-        {
-            type: "input",
-            message: "What is there email?",
-            name: "email"
-        }
-    ];
+    let askBasicInfo = [makeQuestion("input", "What is there name?", "name"), makeQuestion("input", "What is there email?", "email")];
+    let askGithub = [makeQuestion("input", "What is there github?", "github")];
+    let askSchool = [makeQuestion("input", "What is there school?", "school")];
 
-    let askGithub = [
-        {
-            type: "input",
-            message: "What is there github?",
-            name: "github"
-        }
-    ];
-
-    let askSchool = [
-        {
-            type: "input",
-            message: "What is there school?",
-            name: "school"
-        }
-    ];
+    //Done setting up question arrays
 
     let addMember = true;
 
