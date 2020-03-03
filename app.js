@@ -36,7 +36,7 @@ const getManagerInfo = async (currentId) => {
 
 const getTeamInfo = async (currentId) => {
 
-    const askNewMember = [
+    let askNewMember = [
         {
             type: "confirm",
             message: "Would you like to add a team member?",
@@ -44,7 +44,7 @@ const getTeamInfo = async (currentId) => {
         }
     ];
 
-    const typePrompt = [
+    let typePrompt = [
         {
             type: "list",
             message: "Which Team Member are you adding?",
@@ -53,7 +53,7 @@ const getTeamInfo = async (currentId) => {
         }
     ];
 
-    const askBasicInfo = [
+    let askBasicInfo = [
         {
             type: "input",
             message: "What is there name?",
@@ -66,7 +66,7 @@ const getTeamInfo = async (currentId) => {
         }
     ];
 
-    const askGithub = [
+    let askGithub = [
         {
             type: "input",
             message: "What is there github?",
@@ -74,7 +74,7 @@ const getTeamInfo = async (currentId) => {
         }
     ];
 
-    const askSchool = [
+    let askSchool = [
         {
             type: "input",
             message: "What is there school?",
@@ -82,7 +82,6 @@ const getTeamInfo = async (currentId) => {
         }
     ];
 
-    
     let addMember = true;
 
     let members = [];
@@ -120,7 +119,6 @@ const getTeamInfo = async (currentId) => {
     }
 
     return members;
-
 }
 
 async function init(){
@@ -140,11 +138,8 @@ async function init(){
     //Call to Render HTML
     let renderedHtml = render(teamArray);
 
-
     //output html to file
     writeHTML(OUTPUT_DIR, outputPath, renderedHtml);
-
-    //clean up dry code
 }
 
 init();
