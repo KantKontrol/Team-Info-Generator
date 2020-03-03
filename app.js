@@ -121,6 +121,14 @@ const getTeamInfo = async (currentId) => {
     return members;
 }
 
+const makeQuestion = (type, message, name) => {
+    return {
+        type: type,
+        message: message,
+        name: name
+    }
+}
+
 async function init(){
 
     let currentId = 1;
